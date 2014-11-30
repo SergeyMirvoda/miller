@@ -1,0 +1,17 @@
+@media screen {
+.col-md-2-height div{
+    height: 150px;
+}
+.row div{
+    padding: 10px;
+    border: 1px solid black;
+    height: auto;
+    border-collapse: separate;
+    border-spacing: 7px 11px;
+}
+
+.reporttitle{
+    
+    text-align: center;
+}
+}
