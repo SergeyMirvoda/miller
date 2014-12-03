@@ -1,0 +1,72 @@
+@(report: ErrorReportModel)
+
+@import helper._
+@main("Детализированная информация об ошибке") {
+
+    <body>
+        <div class="container">
+        <div id="content">
+            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                <li class="active"><a href="#summary" data-toggle="tab">Сводка</a></li>
+                <li><a href="#details" data-toggle="tab">Подробно</a></li>
+                <li><a href="#request" data-toggle="tab">Параметры запроса</a></li>
+                <li><a href="#env" data-toggle="tab">Среда</a></li>
+            </ul>
+            <div id="my-tab-content" class="tab-content">
+                <div class="tab-pane active" id="summary">
+                    <table class="table table-condensed table-striped table-hover">
+                        <tr>
+                            <td>Дата последнего срабатывания</td>
+                            <td>@report.date</td>
+                        </tr>
+                        <tr>
+                            <td>Сообщение</td>
+                            <td>@report.message</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tab-pane" id="details">
+                        <table class="table table-condensed table-striped table-hover">
+                            <tr>
+                                <td>Стэк</td>
+                                <td>@report.stack</td>
+                            </tr>
+                            <tr>
+                                <td>API KEY</td>
+                                <td>@report.apiKey</td>
+                            </tr>
+                        </table>
+                </div>
+                <div class="tab-pane" id="request">
+                    <table class="table table-condensed table-striped table-hover">
+                        <tr>
+                            <td>Url</td>
+                            <td>@report.url</td>
+                        </tr>
+                        <tr>
+                            <td>USER AGENT</td>
+                            <td>@report.agent</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tab-pane" id="env">
+                    <table class="table table-condensed table-striped table-hover">
+                        <tr>
+                            <td>Браузер</td>
+                            <td>@report.browser</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+            <button type="button" class="btn btn-danger">Удалить</button>
+        <script type="text/javascript">
+
+        </script>
+        </div> <!-- container -->
+
+        <div >
+        </div>
+    </body>
+}

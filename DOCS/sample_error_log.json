@@ -1,0 +1,68 @@
+{
+  "OccurredOn": "2014-12-03T12:22:17.154Z",
+  "Details": {
+    "Error": {
+      "ClassName": "Error",
+      "Message": "42",
+      "StackTrace": [
+        {
+          "LineNumber": 1,
+          "ColumnNumber": 203,
+          "ClassName": "line 1, column 203",
+          "FileName": "http://localhost:8888/",
+          "MethodName": "y"
+        },
+        {
+          "LineNumber": 1,
+          "ColumnNumber": 219,
+          "ClassName": "line 1, column 219",
+          "FileName": "http://localhost:8888/",
+          "MethodName": "d"
+        },
+        {
+          "LineNumber": 1,
+          "ColumnNumber": 227,
+          "ClassName": "line 1, column 227",
+          "FileName": "http://localhost:8888/",
+          "MethodName": "?"
+        }
+      ]
+    },
+    "Environment": {
+      "UtcOffset": 5,
+      "Browser-Width": 1920,
+      "Browser-Height": 528,
+      "Screen-Width": 1920,
+      "Screen-Height": 1080,
+      "Color-Depth": 24,
+      "Browser": "Mozilla",
+      "Browser-Name": "Netscape",
+      "Browser-Version": "5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36",
+      "Platform": "Win32"
+    },
+    "Client": {
+      "Name": "raygun-js",
+      "Version": "1.13.1"
+    },
+    "Tags": [
+
+    ],
+    "Request": {
+      "Url": "http://localhost:8888/",
+      "QueryString": {
+
+      },
+      "Headers": {
+        "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36",
+        "Referer": "",
+        "Host": "localhost"
+      }
+    },
+    "Version": "Not supplied",
+    "User": {
+      "Identifier": "8d362416-a00b-3a65-d88a-d7c87ee921f8",
+      "IsAnonymous": true,
+      "UUID": "8d362416-a00b-3a65-d88a-d7c87ee921f8"
+    }
+  }
+}

@@ -1,55 +1,83 @@
 package controllers;
 
-import models.Task;
-import models.SQLconnection;
-import play.data.*;
+import com.fasterxml.jackson.databind.JsonNode;
+import models.ErrorReportModel;
+import play.Logger;
 import play.data.Form;
-import play.db.*;
-import play.mvc.*;
+import play.libs.Json;
+import play.mvc.Controller;
+import play.mvc.Result;
+import play.mvc.Security;
+import views.html.index;
+import views.html.login;
+import views.html.viewerror;
 
-import java.sql.*;
-import java.util.*;
-import views.html.*;
+import java.util.UUID;
+
+import static play.data.Form.form;
 
 public class Application extends Controller {
 
-    static Form<Task> taskForm = Form.form(Task.class);
-
+    @Security.Authenticated(Secured.class)
     public static Result index() {
-        return redirect(controllers.routes.Application.tasks());
-    }
-
-
-    public static Result tasks(){
-        return ok(views.html.index.render(Task.all(), taskForm));
-    }
-
-    public static Result newTask(){ //для in-memory h2 database
-        Form<Task> filledForm = taskForm.bindFromRequest();
-        if (filledForm.hasErrors()){
-            return badRequest(views.html.index.render(Task.all(), filledForm));
-        } else {
-            Task.create(filledForm.get());
-            return redirect(routes.Application.tasks());
+        try {
+            Logger.info("Отображение списка для apiKey: " +session().get("apiKey"));
+            return ok(index.render(ErrorReportModel.find
+                                    .where()
+                                    .eq("apiKey", session().get("apiKey"))
+                                    .findList()
+                    )
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 
-
-    public static Result deleteTask(Long id){
-        Task.delete(id);
-        return redirect(routes.Application.tasks());
+    @Security.Authenticated(Secured.class)
+    public static Result errors(UUID id) {
+        return ok(viewerror.render(ErrorReportModel.find.byId(id)));
+    }
+    public static Result log() {
+        if (request().body() == null || request().body().asJson()==null){
+            System.out.println(request().body());
+            return badRequest("json value have to be provided:");
+        }
+        JsonNode json = request().body().asJson();
+        ErrorReportModel model = Json.fromJson(json, ErrorReportModel.class);
+        model.id = UUID.randomUUID();
+        ErrorReportModel.save(model);
+        return play.mvc.Results.ok();
     }
 
-    public static Result errorMonitor(){
-        return ok(views.html.errormonitor.render(Task.all(),taskForm));
+    public static Result login() {
+        return ok(
+                login.render(form(Login.class))
+        );
     }
 
-    Connection connection = DB.getConnection();
+    public static Result authenticate() {
+        Form<Login> loginForm = form(Login.class).bindFromRequest();
+        if (loginForm.hasErrors()) {
+            return badRequest(login.render(loginForm));
+        } else {
+            session().clear();
+            //Получить из БД apiKey и установить его в сессию
+            session("apiKey", "DEV-KEY_1");//Пока установим тестовый
+            return redirect(
+                    routes.Application.index()
+            );
+        }
+    }
 
+    public static Result register() {
+        return play.mvc.Results.TODO;
+    }
 
-    /*public static void sqlQuery(){
-       return ok();
-    }*/
+    public static class Login {
 
+        public String email;
+        public String password;
 
- }
+    }
+}
