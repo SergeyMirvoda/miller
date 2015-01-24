@@ -9,9 +9,14 @@
     border-collapse: separate;
     border-spacing: 7px 11px;
 }
-
+.viewerror{
+    margin-top: 4%;
+}
+.pagenotfound{
+    margin-left: 20%;
+    margin-top: 20%;
+}
 .reporttitle{
-    
     text-align: center;
 }
 }
