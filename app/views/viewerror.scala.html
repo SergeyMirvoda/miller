@@ -4,7 +4,7 @@
 @main("Детализированная информация об ошибке") {
 
     <body>
-        <div class="container">
+        <div class="container viewerror">
         <div id="content">
             <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
                 <li class="active"><a href="#summary" data-toggle="tab">Сводка</a></li>
@@ -22,6 +22,10 @@
                         <tr>
                             <td>Сообщение</td>
                             <td>@report.message</td>
+                        </tr>
+                        <tr>
+                            <td>Клиент</td>
+                            <td>@report.client</td>
                         </tr>
                     </table>
                 </div>
@@ -44,29 +48,83 @@
                             <td>@report.url</td>
                         </tr>
                         <tr>
+                            <td>Host</td>
+                            <td>@report.host</td>
+                        </tr>
+                        <tr>
                             <td>USER AGENT</td>
                             <td>@report.agent</td>
                         </tr>
+
                     </table>
                 </div>
                 <div class="tab-pane" id="env">
                     <table class="table table-condensed table-striped table-hover">
                         <tr>
+                            <td>Изготовитель</td>
+                            <td>@report.browserVendor</td>
+                        </tr>
+                        <tr>
                             <td>Браузер</td>
                             <td>@report.browser</td>
                         </tr>
+                        <tr>
+                            <td>Версия Браузера</td>
+                            <td>@report.browserVersion</td>
+                        </tr>
+                        <tr>
+                            <td>Язык</td>
+                            <td>@report.browserLanguage</td>
+                        </tr>
+                        <tr>
+                            <td>Размер окна браузера</td>
+                            <td>@report.browserResolution</td>
+                        </tr>
+                        <tr>
+                            <td>Cookie</td>
+                            @if(report.browserCookie == "true"){
+                                <td>Enabled</td>
+                            }
+                            @if(report.browserCookie == "false"){
+                                <td>Disabled</td>
+                                }
+                        </tr>
+                        <tr>
+                            <td>Java</td>
+                            @if(report.browserJava == "true"){
+                                <td>Enabled</td>
+                            }
+                            @if(report.browserJava == "false"){
+                                <td>Disabled</td>
+                            }
+                        </tr>
+                        <tr>
+                            <td>Разрядность процесса</td>
+                            <td>@report.platform</td>
+                        </tr>
+                        <tr>
+                            <td>Операционная система</td>
+                            <td>@report.platformVersion</td>
+                        </tr>
+                        <tr>
+                            <td>Разрещение экрана</td>
+                            <td>@report.screenResolution</td>
+                        </tr>
+
                     </table>
                 </div>
             </div>
         </div>
 
-            <button type="button" class="btn btn-danger">Удалить</button>
-        <script type="text/javascript">
+            @helper.form(routes.Application.remove(report.id)){
+            <input type="submit" class="id btn btn-danger" value="Удалить">
+            }
+    <script type="text/javascript">
 
         </script>
         </div> <!-- container -->
 
-        <div >
+        <div ><!-- footer -->
         </div>
     </body>
 }

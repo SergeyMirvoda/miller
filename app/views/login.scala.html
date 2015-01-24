@@ -1,27 +1,40 @@
-@(form: play.data.Form[Application.Login])
+@(form: Form[Application.Login])
+
+
 
 <html>
     <head>
-        <title>RTF ERROR-TRACKER</title>
+        @main(title = "RTF ERROR-TRACKER"){
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
     </head>
     <body>
-        <header>
-            <a href="@routes.Application.register" id="logo">Регистрация</a>
-        </header>
-        @helper.form(routes.Application.authenticate) {
-        <h1>Вход</h1>
+        <div class="text-center">
 
-        <p>
-            <input type="email" name="email" placeholder="Email" value="@form("email").value">
-        </p>
-        <p>
-            <input type="password" name="password" placeholder="Password">
-        </p>
-        <p>
-            <button type="submit">Вход</button>
-        </p>
-        }
+            <h1 class="page-header">Вход</h1>
+
+            @helper.form(routes.Application.authenticate()){
+            <div>
+                <p>
+                <input type="email" name="email" placeholder="Email" value="@form("email").value">
+            </p>
+            <p>
+                <input type="password" name="password" placeholder="Password">
+            </p>
+                </div>
+
+                @if(form.hasGlobalErrors) {
+                    <div class="alert-link h4" style="color: red">
+                    @form.globalError.message
+                    </div>
+                }
+            <p>
+                <button type="submit">Вход</button>
+            </p>
+
+            }
+
+        </div>
     </body>
+    }
 </html>
