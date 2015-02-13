@@ -7,7 +7,7 @@
     <body>
 
     @helper.form(routes.Application.newUser()) {
-        <div class="pager">
+        <div class="text-center text-margin">
             <H1 class="page-header">Регистрация</H1>
             <div style="margin-top: 50px">
                 <p>
@@ -19,8 +19,12 @@
                 </p>
 
                 <p>
-                    <input type="confirmPassword" name="confirmPassword" placeholder="Пароль еще раз">
+                    <input type="password" name="confirmPassword" placeholder="Пароль еще раз">
                 </p>
+                @helper.inputRadioGroup(registerForm("lang"),
+                    options = options("rus"->"Русский", "eng"->"English"),
+                    '_label -> "Выберите язык: "
+                )
                 @if(registerForm.hasGlobalErrors) {
                     <div class="error" style="color: red">
                     @registerForm.globalError.message

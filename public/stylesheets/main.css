@@ -1,22 +1,32 @@
 @media screen {
-.col-md-2-height div{
-    height: 150px;
-}
-.row div{
-    padding: 10px;
-    border: 1px solid black;
-    height: auto;
-    border-collapse: separate;
-    border-spacing: 7px 11px;
-}
-.viewerror{
-    margin-top: 4%;
-}
-.pagenotfound{
-    margin-left: 20%;
-    margin-top: 20%;
-}
-.reporttitle{
-    text-align: center;
-}
+    .col-md-2-height div{
+        height: 150px;
+    }
+    .row div{
+        padding: 10px;
+        border: 1px solid black;
+        height: auto;
+        border-collapse: separate;
+        border-spacing: 7px 11px;
+    }
+    .viewerror{
+        margin-top: 4%;
+    }
+    .pagenotfound{
+        margin-left: 20%;
+        margin-top: 20%;
+    }
+    .reporttitle{
+        text-align: center;
+    }
+    .navbar-center{
+        position: absolute;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        margin: auto;
+    }
+    .text-margin{
+        margin-top: 20%;
+    }
 }

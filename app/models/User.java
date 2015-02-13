@@ -5,6 +5,7 @@ import play.data.validation.Constraints;
 import play.db.ebean.Model;
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -16,17 +17,34 @@ import java.util.List;
     public class User extends Model {
 
         @Id
-        @Constraints.Required(message = "Required")
+        @Constraints.Required
         @Formats.NonEmpty
-        public String email;
+        public String   email;
 
-        @Constraints.Required(message = "Required")
-        public String password;
+        @Constraints.Required
+        public String    password;
 
-        @Constraints.Required(message = "Required")
+        @Constraints.Required
         public transient String confirmPassword;
 
-        public User(){
+        public String   applicationName;
+
+        public UUID     appKey;// (User.appKey == ErrorReportModel.apiKey)
+
+        public String   description;
+
+        @Formats.NonEmpty
+        public String    lang;
+
+
+        public User(String email, String password, String applicationName, UUID appKey, String description, String lang){
+            this.email = email;
+            this.password = password;
+            this.applicationName = applicationName;
+            this.appKey = appKey;
+            this.description = description;
+            this.lang = lang;
+
         }
 
         public void setEmail(String email){
@@ -37,6 +55,23 @@ import java.util.List;
             this.password = password;
         }
 
+        public void setApplicationName(String applicationName) {
+            this.applicationName = applicationName;
+        }
+
+        public void setAppKey(UUID appKey) {
+            this.appKey = appKey;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public void setLang(String lang){
+            this.lang = lang;
+        }
+
+
         public String getEmail(){
             return email;
         }
@@ -44,6 +79,23 @@ import java.util.List;
         public String getPassword(){
             return password;
         }
+
+        public String getApplicationName() {
+            return applicationName;
+        }
+
+        public UUID getAppKey() {
+            return appKey;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getLang(){
+            return lang;
+        }
+
 
         public static Model.Finder<String,User> find = new Finder<>(String.class, User.class);
 
@@ -78,9 +130,14 @@ import java.util.List;
             return true;
         }
 
-        //create new user
+        public static User create(String email, String password, String applicationName, UUID appKey, String description, String lang){
+
+            User user = new User(email, password, applicationName, appKey, description, lang);
+            user.save();
+            return user;
+    }
         @Override
-        public void save(){
+        public void save(){//create new user
             super.save();
         }
 
@@ -95,10 +152,21 @@ import java.util.List;
 
             if (!password.equals(confirmPassword))
                 return "Пароли не совпадают";
+            if(lang == null)
+                return "Выберите язык интерфейса";
 
             return null;
         }
 
+        public static UUID uuidGeneration(){
+            UUID x = UUID.randomUUID();
+
+            return x;
+        }
+
+        public static User findByKey(UUID appKey){
+            return find.where().eq("appKey", appKey).findUnique();
+        }
 
 
     }

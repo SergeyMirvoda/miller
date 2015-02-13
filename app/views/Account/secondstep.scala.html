@@ -1,0 +1,36 @@
+@(userForm: Form[User])
+@import helper._
+
+@main("Регистрация нового пользователя") {
+
+
+
+    <html>
+        <body>
+
+        @helper.form(action = routes.Application.addNewApplication()) {
+
+            <div class="alert-danger"><p>Добавить кнопку пропустить</p></div>
+
+            <div class="text-center text-margin">
+
+
+                <p>
+                    <input type="applicationName" name="applicationName" placeholder="applicationName"  >
+                </p>
+
+
+
+                <p>
+                    <input type="description" name="description" placeholder="description"  >
+                </p>
+
+
+                <button class="btn btn-primary" type="submit">@Messages("Save")</button>
+
+
+            </div>
+        </body>
+        }
+    </html>
+}

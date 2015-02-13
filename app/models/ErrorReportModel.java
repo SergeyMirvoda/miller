@@ -4,7 +4,6 @@ import com.avaje.ebean.Ebean;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.UUID;
 
 /**

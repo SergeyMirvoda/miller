@@ -1,0 +1,33 @@
+@(user: User)
+
+@main(Messages("change user information")){
+    <div>
+        <h1>@Messages("Edit user information")</h1>
+        <fieldset>
+            <div class="h6">@Messages("change your email address")</div>
+            <p>
+                <input type="text" name="email" value="@user.email" required>
+            </p>
+            <div class="h6">@Messages("change your localization")</div>
+            <p>
+                <input type="text" name="lang" value="@user.lang" required>
+            </p>
+
+            <fieldset>
+                <div class="h6">@Messages("change your password")</div>
+                <p>
+                    <input type="password" name="password" value="@user.password" required>
+                </p>
+                <p>
+                    <input type="password" name="confirmPassword" placeholder="@Messages("repeat password") required>
+                </p>
+            </fieldset>
+
+        </fieldset>
+
+    </div>
+
+
+
+
+}

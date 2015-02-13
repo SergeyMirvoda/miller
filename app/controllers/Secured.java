@@ -10,7 +10,7 @@ import play.mvc.Security;
 public class Secured extends Security.Authenticator {
     @Override
     public String getUsername(Http.Context ctx) {
-        return ctx.session().get("apiKey");
+        return ctx.session().get("email");
     }
 
     @Override

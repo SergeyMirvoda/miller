@@ -32,13 +32,37 @@
                 })
             }
             </script>
+        <style>
+        html {
+        position: relative;
+        min-height: 100%;
+        }
+        body {
+        /* Margin bottom by footer height */
+        margin-bottom: 60px;
+        }
+        footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 60px;
+        background-color: #f5f5f5;
+        }
+        .container {
+        width: auto;
+        max-width: 680px;
+        padding: 0 15px;
+        }
+
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-default" role="navigation">
 
                 <!-- Navbar -->
-                <div class="navbar-collapse navbar-ex1-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <div class="navbar-ex1-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-center navbar-nav">
 
                     @if(request.username == null) {
                         <li class="active"><a href="@routes.Application.index()">Главная страница</a></li>
@@ -49,7 +73,8 @@
                         <li class="active"><a href="@routes.Application.index()">Журнал</a></li>
                         <li class=""><a href="@routes.Application.index()" onclick="throwSampleError()">
                         Сгенерировать тестовое исключение</a></li>
-
+                        <li class="active "><a href="@routes.Application.settings()"><strong>Настройки</strong></a></li>
+                        <li><a href="#"><strong>Документация</strong></a></li>
                         <li class="active"><a href="@routes.Application.logout()">Выход</a></li>
                     }
                 </ul>
@@ -59,6 +84,11 @@
 
         @content
 
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted text-center"><strong>2015</strong><br/>Дипломная работа Владимира Миллера</p>
+            </div>
+        </footer>
             <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
             <!-- Include all compiled plugins (below), or include individual files as needed -->

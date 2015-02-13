@@ -1,0 +1,17 @@
+@(path: String)
+<html>
+    @main("Хьюстон у нас проблемы") {
+    <body>
+        <div class="pagenotfound">
+            <p class="invisible">@path</p>
+            <h1 class="text-danger">Страница не найдена</h1>
+            <p class="h4" id="href"></p>
+            <script>
+            var currentlocation = window.location.href;
+            document.getElementById("href").innerHTML = currentlocation;
+            </script>
+            <a class="" href="@routes.Application.index()">Вернитесь на главную страницу</a>
+        </div>
+    </body>
+    }
+</html>

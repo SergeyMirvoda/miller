@@ -1,0 +1,13 @@
+@(error: String)
+
+@main("Хьюстон у нас проблемы") {
+    <body><div class="pagenotfound">
+        <div class=" text-danger">
+            <h1>Что то пошло не так!</h1>
+            <p class="h4">
+                400 Bad Request <br/>@error
+            </p>
+        </div>
+    </div>
+    </body>
+}

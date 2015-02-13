@@ -13,6 +13,16 @@ public class Global extends GlobalSettings {
     @Override
     public Promise<SimpleResult> onHandlerNotFound(RequestHeader request) {
         //Обработка 404 - Page not found
-        return Promise.<SimpleResult> pure(notFound(views.html.pageNotFound.render(request.uri())));
+        return Promise.<SimpleResult> pure(notFound(views.html.ServicePage.pageNotFound.render(request.uri())));
+    }
+
+    @Override
+    public Promise<SimpleResult> onBadRequest(RequestHeader request, String error){
+        return Promise.<SimpleResult>pure(badRequest(views.html.ServicePage.badRequest.render(error)));
+    }
+    @Override
+    public Promise<SimpleResult> onError(RequestHeader request, Throwable t){
+        String error = t.toString();
+        return Promise.<SimpleResult> pure(internalServerError(views.html.ServicePage.errorPage.render(error)));
     }
 }

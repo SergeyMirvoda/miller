@@ -1,40 +1,34 @@
 @(form: Form[Application.Login])
 
 
+    @main(title = "RTF ERROR-TRACKER"){
 
-<html>
-    <head>
-        @main(title = "RTF ERROR-TRACKER"){
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
-    </head>
-    <body>
-        <div class="text-center">
+        <body>
+            <div class="text-center text-margin">
 
-            <h1 class="page-header">Вход</h1>
+                <h1 class="page-header">Вход</h1>
 
-            @helper.form(routes.Application.authenticate()){
-            <div>
-                <p>
-                <input type="email" name="email" placeholder="Email" value="@form("email").value">
-            </p>
-            <p>
-                <input type="password" name="password" placeholder="Password">
-            </p>
-                </div>
-
-                @if(form.hasGlobalErrors) {
-                    <div class="alert-link h4" style="color: red">
-                    @form.globalError.message
+                @helper.form(routes.Application.authenticate()){
+                    <div class="">
+                        <p>
+                            <input type="email" name="email" placeholder="Email" value="@form("email").value">
+                        </p>
+                        <p>
+                            <input type="password" name="password" placeholder="Password">
+                        </p>
                     </div>
+
+                    @if(form.hasGlobalErrors) {
+                        <div class="alert-link h4" style="color: red">
+                        @form.globalError.message
+                        </div>
+                    }
+                    <p>
+                        <button class="small button" type="submit">Вход</button>
+                    </p>
+
                 }
-            <p>
-                <button type="submit">Вход</button>
-            </p>
 
-            }
-
-        </div>
-    </body>
+            </div>
+        </body>
     }
-</html>
