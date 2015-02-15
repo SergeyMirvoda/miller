@@ -2354,8 +2354,9 @@ output {
   color: #555;
 }
 .form-control {
+  margin: 0px auto
   display: block;
-  width: 100%;
+  width: 390px;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;

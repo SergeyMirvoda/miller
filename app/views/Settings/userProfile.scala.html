@@ -3,24 +3,27 @@
 @import helper._
 
 
-@main(Messages("playauthenticate.change.password.title")) {
+@main(Messages("Изменить пароль")) {
+    <div class="text-center text-margin">
+        <h1>@Messages("Изменить пароль")</h1>
 
-    <h1>@Messages("playauthenticate.change.password.title")</h1>
-    <p>
-    @form(routes.Application.userProfileEdit) {
+        @form(routes.Application.userProfileEdit) {
+        <br>
+        <div>
+            <input class="form-control input"  type="text" name="oldPass" placeholder="Введите текущий пароль">
+        </div>
+        <br>
+        <div >
+            <input class="input form-control "  type="text" name="newPass" placeholder="Введите новый пароль">
+        </div>
+        <br>
+        <div >
+            <input class="form-control input" type="text" name="rePass" placeholder="Повторите новый пароль">
+        </div>
+            <br>
 
-    <p>
-        <input type="text" name="oldPass" placeholder="oldPassword">
-    </p>
-    <p>
-        <input type="text" name="newPass" placeholder="new password">
-    </p>
-    <p>
-        <input type="text" name="rePass" placeholder="re:">
-    </p>
+        <button type="submit" class="btn btn-primary">@Messages("Сохранить изменения")</button>
 
-
-    <button type="submit" class="btn btn-default">playauthenticate.change.password.cta</button>
-}
+    </div>}
 
 }

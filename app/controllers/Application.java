@@ -48,53 +48,66 @@ public class Application extends Controller {
         return ok(viewerror.render(ErrorReportModel.find.byId(id)));
     }
 
+    @Security.Authenticated(Secured.class)
     public static Result log()  {
-            if (request().body() == null || request().body().asJson()==null){
+        if (request().body() == null || request().body().asJson()==null){
                     System.out.println(request().body());
-                return badRequest("json value have to be provided:");
-            }
-            JsonNode json = request().body().asJson();
-            ErrorReportModel model = Json.fromJson(json, ErrorReportModel.class);
-            model.id = UUID.randomUUID();
-            model.happens = 1;
-            String x = model.getMessage();
+            return badRequest("json value have to be provided:");
+        }
+        JsonNode json = request().body().asJson();
+        ErrorReportModel model = Json.fromJson(json, ErrorReportModel.class);
+        model.id = UUID.randomUUID();
+        model.happens = 1;
 
-            List<ErrorReportModel> list = ErrorReportModel.find.where().eq("message", x).findList();// упорядочили по сообщению
-            int counter = list.size();
+        String x = model.getMessage();
 
-            for (ErrorReportModel reportModel : list) {
-                if (list.size() != 0) {
-                    /**
-                     * TODO добавить коментарий
-                     * TODO добавить проверку на принадлежность к ключу
-                     */
-                    if (reportModel.happens == 1) {
-                        int temp = counter;
+        List<ErrorReportModel> list = ErrorReportModel.find.where().eq("message", x).findList();// упорядочили по сообщению
+        int counter = list.size();
+
+        for (ErrorReportModel reportModel : list) {
+            if (list.size() != 0) {
+                /**
+                 * TODO добавить коментарий
+                 * TODO добавить проверку на принадлежность к ключу
+                 */
+                if (reportModel.happens == 1) {
+                    int temp = counter;
                         model.setHappens(model.happens + 1);
                         Ebean.delete(reportModel);
                         Ebean.save(reportModel);
                         Ebean.save(model);
 
-                    } else if (reportModel.happens > 1) {
-                        int temp = counter;
-                        temp = temp - 1;
-                        temp = temp + reportModel.happens;
-                        Ebean.delete(reportModel);
-                        Ebean.save(reportModel);
-                        model.setHappens(temp + 1);
-                        Ebean.save(model);
-                    } else if (reportModel.happens == 0) {
+                } else if (reportModel.happens > 1) {
+                    int temp = counter;
+                    temp = temp - 1;
+                    temp = temp + reportModel.happens;
+                    Ebean.delete(reportModel);
+                    Ebean.save(reportModel);
+                    model.setHappens(temp + 1);
+                    Ebean.save(model);
+                } else if (reportModel.happens == 0) {
                         Ebean.delete(reportModel);
                         System.out.println("Something go wrong");
-                    }
-                } else if (list.size() == 0) {
-                    Ebean.save(model);
-                }}
-
-            flash("new report been added");
-            ErrorReportModel.save(model);
-            return play.mvc.Results.ok();
+                }
+            } else if (list.size() == 0) {
+                Ebean.save(model);
+                }
         }
+
+        flash("new report been added");
+        ErrorReportModel.save(model);
+        return play.mvc.Results.ok();
+        }
+    @Security.Authenticated(Secured.class)
+    public static UUID reportChecker(UUID newId){
+        String email = session().get("email");
+        User user = User.findByEmail(email);
+        if (user.appKey == newId){
+            return newId;
+        }else{
+        return null;
+    }
+    }
 
 
 
