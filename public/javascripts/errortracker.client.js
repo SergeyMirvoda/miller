@@ -252,7 +252,7 @@ var ET = (function () {
 
         var data = JSON.stringify({
         //Сводка
-            message: "Page not found",
+            message: "Page not Found",
             date: getTime().Date,
 
         //Подробно
