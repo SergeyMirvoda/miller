@@ -1,0 +1,42 @@
+@(user: User)
+@import helper._
+
+@main(Messages("change user information")){
+
+
+        <div class="text-center text-margin">
+
+            <h1>Edit application info</h1>
+            <fieldset>
+            @form(routes.Application.applicationProfileEdit()) {
+                <br>
+                <div class="h4">change application name </div>
+                <p>
+                    <input type="text" name="applicationName" value="@user.applicationName">
+                </p>
+                <div class="h4">change description </div>
+                <p>
+                    <input type="text" name="description" value="@user.description">
+                </p>
+                <br>
+
+                <button type="submit"> Save changes </button>
+            }
+            </fieldset>
+            <br>
+            <fieldset>
+            @form(routes.Application.apiKeyGenerator()) {
+
+                <div class="h4">change <Strong>application Key</Strong></div>
+                <p>
+                    <input type="text" name="appKey" value="@user.appKey">
+                </p>
+                <button class="btn  btn-danger" type="submit"> Generate new key </button>
+            }
+            </fieldset>
+        </div>
+
+
+
+
+    }

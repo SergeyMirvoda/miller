@@ -1,0 +1,19 @@
+@(user: User)
+@import helper._
+
+@main(Messages("change application Key")){
+
+
+
+@form(routes.Application.apiKeyGenerator()) {
+    <fieldset>
+        <div class="text-margin text-center">
+        <div class="h4 text-capitalize">Change <Strong>application Key</Strong> for <Strong>@user.applicationName</Strong></div>
+        <p>
+           <input class="h4" style="padding: 10px; display: inline-block; width: 350px; text-align: center" type="text" readonly name="appKey" value="@user.appKey">
+        </p>
+        <button class="btn  btn-danger" type="submit"> Generate new key </button>
+        </div>
+</fieldset>
+}
+}

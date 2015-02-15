@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import models.*;
 import play.Logger;
 import play.data.Form;
+import play.data.validation.Constraints;
+import play.i18n.Messages;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -26,7 +28,7 @@ public class Application extends Controller {
             String username = session().get("email");
             User user = User.findByEmail(username);
             UUID key = user.appKey;
-            Logger.info("list for ApiKey || Отображение списка для email: " +username);
+            Logger.info("list for ApiKey || Отображение списка для email: " +username + key);
             flash("success");
             return ok(index.render(ErrorReportModel.find
                                     .where()
@@ -191,6 +193,82 @@ public class Application extends Controller {
     public static Result settings() {
         return  play.mvc.Results.ok(views.html.Settings.options.render());
     }
+
+
+    @Security.Authenticated(Secured.class)
+    public static Result userProfilePage() {
+        User user = User.findByEmail(session().get("email"));
+        return play.mvc.Results.ok(views.html.Settings.userProfile.render(user));
+    }
+    @Security.Authenticated(Secured.class)
+    public static Result userProfileEdit() {
+        final User user = User.findByEmail(session().get("email"));
+        String passOrigin = user.password;
+        String oldPass = form().bindFromRequest().get("oldPass");
+        String newPass = form().bindFromRequest().get("newPass");
+        String rePass = form().bindFromRequest().get("rePass");
+        System.out.println(newPass+" "+ rePass+":new  old:"+oldPass+" "+passOrigin );       //TODO clear
+        String passValidation = passwordIsValid(session().get("email"), oldPass);
+        if (passValidation == null){
+            return ok("не совпали1");
+        }else {
+            if ((newPass == rePass) || newPass != null){
+                System.out.println("new " +newPass+" "+ rePass);        //TODO clear
+                user.setPassword(newPass);
+                user.setPassword(newPass);
+                user.update();
+                Ebean.update(user);
+                return GO_HOME;
+
+            }else{
+                return ok("не совпали2");
+            }
+        }
+    }
+    public static String passwordIsValid(String email, String oldPassword){
+        User user = User.findByEmail(email);
+        if (!user.password.equals(oldPassword))
+            return null;
+        return oldPassword;
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result applicationProfilePage() {
+        User user = User.findByEmail(session().get("email"));
+        return play.mvc.Results.ok(views.html.Settings.applicationProfile.render(user));
+    }
+    @Security.Authenticated(Secured.class)
+    public static Result applicationProfileEdit(){
+        User user = User.findByEmail(session().get("email"));
+        String appName = form().bindFromRequest().get("applicationName");
+        String descript = form().bindFromRequest().get("description");
+        System.out.println("new " +appName+" "+ descript);      //TODO clear
+        user.setApplicationName(appName);
+        user.setDescription(descript);
+
+        user.save();
+        Ebean.save(user);
+        return play.mvc.Results.ok(views.html.Settings.applicationProfile.render(user));
+    }
+    @Security.Authenticated(Secured.class)
+    public static Result applicationKeyPage() {
+        User user = User.findByEmail(session().get("email"));
+        return play.mvc.Results.ok(views.html.Settings.applicationKey.render(user));
+    }
+    @Security.Authenticated(Secured.class)
+    public static Result apiKeyGenerator(){
+        UUID x = UUID.randomUUID();
+        System.out.println(x);      //TODO clear
+        User user = User.findByEmail(session().get("email"));
+        user.setAppKey(x);
+        user.save();
+        Ebean.save(user);
+
+        return play.mvc.Results.ok(views.html.Settings.applicationKey.render(user));
+
+    }
+
+
 
     //тестовое оповещение об ошибке
     public static Result testOnError() {

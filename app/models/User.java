@@ -22,9 +22,9 @@ import java.util.UUID;
         public String   email;
 
         @Constraints.Required
+        @Formats.NonEmpty
         public String    password;
 
-        @Constraints.Required
         public transient String confirmPassword;
 
         public String   applicationName;
@@ -131,17 +131,17 @@ import java.util.UUID;
         }
 
         public static User create(String email, String password, String applicationName, UUID appKey, String description, String lang){
-
             User user = new User(email, password, applicationName, appKey, description, lang);
             user.save();
             return user;
     }
         @Override
-        public void save(){//create new user
+        public void save(){     //create new user
             super.save();
         }
 
         // update user
+        @Override
         public void update(){
             super.save();
         }
@@ -157,6 +157,8 @@ import java.util.UUID;
 
             return null;
         }
+
+
 
         public static UUID uuidGeneration(){
             UUID x = UUID.randomUUID();

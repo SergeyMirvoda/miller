@@ -3,30 +3,37 @@
 # ~~~~
 
 # Главная страница - список отчётов об ошибках
-GET         /                    controllers.Application.index()
-GET         /errors/:id          controllers.Application.errors(id:java.util.UUID)
-POST        /remove/:id          controllers.Application.remove(id:java.util.UUID)
+GET         /                           controllers.Application.index()
+GET         /errors/:id                 controllers.Application.errors(id:java.util.UUID)
+POST        /remove/:id                 controllers.Application.remove(id:java.util.UUID)
 
 
 #Публикация JSON, содержащего сообщения об ошибках
-POST        /api/log             controllers.Application.log()
+POST        /api/log                    controllers.Application.log()
 
 #Аутентификация
-GET         /login               controllers.Application.login()
-POST        /login               controllers.Application.authenticate()
-GET         /logout              controllers.Application.logout()
+GET         /login                      controllers.Application.login()
+POST        /login                      controllers.Application.authenticate()
+GET         /logout                     controllers.Application.logout()
 
 #Регистрация
-GET         /register            controllers.Application.register()
-POST        /register            controllers.Application.newUser()
+GET         /register                   controllers.Application.register()
+POST        /register                   controllers.Application.newUser()
 
-GET         /about               controllers.Application.about()
-GET         /Settings            controllers.Application.settings()
+GET         /steptwo                    controllers.Application.secondRegistrationStep()
+POST        /steptwo                    controllers.Application.addNewApplication()
 
-GET         /steptwo             controllers.Application.secondRegistrationStep()
-POST        /steptwo             controllers.Application.addNewApplication()
+GET         /about                      controllers.Application.about()
+GET         /Settings                   controllers.Application.settings()
+GET         /userSettings               controllers.Application.userProfilePage()
+POST        /userSettings               controllers.Application.userProfileEdit()
+
+GET         /applicationSettings        controllers.Application.applicationProfilePage()
+POST        /applicationSettings        controllers.Application.applicationProfileEdit()
+GET         /applicationKey             controllers.Application.applicationKeyPage()
+POST        /applicationKey             controllers.Application.apiKeyGenerator()
 
 # странички для тестов
-GET         /testOnError         controllers.Application.testOnError
+GET         /testOnError                controllers.Application.testOnError
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.at(path="/public", file)
+GET         /assets/*file               controllers.Assets.at(path="/public", file)
