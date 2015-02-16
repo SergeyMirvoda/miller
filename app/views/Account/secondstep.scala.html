@@ -15,18 +15,19 @@
             <div class="text-center text-margin">
 
 
+                <div class="h2">@Messages("Назовите ваше приложение: ")</div>
                 <p>
-                    <input type="applicationName" name="applicationName" placeholder="applicationName"  >
+                    <input class="input form-control" name="applicationName" >
                 </p>
 
-
-
+                <br>
+                <div class="h2">@Messages("Опишите ваше приложение: ")</div>
                 <p>
-                    <input type="description" name="description" placeholder="description"  >
+                    <textarea class="input form-control" name="description"></textarea>
                 </p>
-
-
-                <button class="btn btn-primary" type="submit">@Messages("Save")</button>
+                <br>
+                <button class="btn btn-danger" type="submit"><a href="@routes.Application.index()" style="color: #ffffff; text-decoration: none">Пропустить</a></button>
+                <button class="btn btn-primary" type="submit">@Messages("Продолжить")</button>
 
 
             </div>

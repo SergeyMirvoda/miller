@@ -11,10 +11,10 @@
                 @helper.form(routes.Application.authenticate()){
                     <div class="">
                         <p>
-                            <input type="email" name="email" placeholder="Email" value="@form("email").value">
+                            <input class="input form-control" type="email" name="email" placeholder="Email" value="@form("email").value">
                         </p>
                         <p>
-                            <input type="password" name="password" placeholder="Password">
+                            <input class="input form-control" type="password" name="password" placeholder="Password">
                         </p>
                     </div>
 
@@ -24,7 +24,7 @@
                         </div>
                     }
                     <p>
-                        <button class="small button" type="submit">Вход</button>
+                        <button class="btn btn-primary" type="submit">@Messages("Войти")</button>
                     </p>
 
                 }

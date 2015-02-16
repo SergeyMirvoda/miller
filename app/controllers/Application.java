@@ -176,10 +176,11 @@ public class Application extends Controller {
     }
 
     //можно сразу заполнить информацию о приложении, а можно пропустить и заполнить потом
+    @Security.Authenticated(Secured.class)
     public static Result secondRegistrationStep(){
         return ok(views.html.Account.secondstep.render(form(User.class)));
     }
-
+    @Security.Authenticated(Secured.class)
     public static Result addNewApplication(){
         String username = session().get("email");
         UUID key = User.uuidGeneration();

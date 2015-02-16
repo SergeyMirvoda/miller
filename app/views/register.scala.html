@@ -11,27 +11,29 @@
             <H1 class="page-header">Регистрация</H1>
             <div style="margin-top: 50px">
                 <p>
-                    <input type="email" name="email" placeholder="Email" >
+                    <input class="input form-control" type="email" name="email" placeholder="Email" >
                 </p>
     
                 <p>
-                    <input type="password" name="password" placeholder="Пароль" >
+                    <input class="input form-control" type="password" name="password" placeholder="Пароль" >
                 </p>
 
                 <p>
-                    <input type="password" name="confirmPassword" placeholder="Пароль еще раз">
+                    <input class="input form-control" type="password" name="confirmPassword" placeholder="Пароль еще раз">
                 </p>
+                <div class="menu-item-radio">
                 @helper.inputRadioGroup(registerForm("lang"),
                     options = options("rus"->"Русский", "eng"->"English"),
                     '_label -> "Выберите язык: "
                 )
+                    </div>
                 @if(registerForm.hasGlobalErrors) {
                     <div class="error" style="color: red">
                     @registerForm.globalError.message
                     </div>
                 }
                 <p>
-                    <button class="small button" type="submit">@Messages("Зарегистрироваться")</button>
+                    <button class="btn btn-primary" type="submit">@Messages("Зарегистрироваться")</button>
                 </p>
             </div>
             }
