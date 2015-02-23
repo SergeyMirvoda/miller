@@ -1,4 +1,8 @@
 @media screen {
+    body{
+        background-color: #fefcff !important;
+        font-family: 'Open Sans Condensed', sans-serif !important;
+    }
     .col-md-2-height div{
         height: 150px;
     }
@@ -30,12 +34,36 @@
         margin-top: 20%;
     }
     .input {
-        margin: 0px auto
-        padding: 10px;
+        margin: 0px auto ;
+        padding : 10px;
         display: inline;
         width: 390px;
         text-align: center;
+    }
+    .withoutunderline{
+    text-decoration: none !important;
+    }
+    .navbar-default{
+        background-color: #DDC8C4 !important;
+    }
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 50px;
+        background-color: #896A67;
 
+    }
+    .blackfont{
+        color: #000000;
+    }
+    .btn-green{
+
+        color: #fff;
+        background-color: #69995D;
+        border-color: #65905a !important;
+        font-weight: bold !important;
     }
 
 }

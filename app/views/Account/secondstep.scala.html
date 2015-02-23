@@ -10,7 +10,7 @@
 
         @helper.form(action = routes.Application.addNewApplication()) {
 
-            <div class="alert-danger"><p>Добавить кнопку пропустить</p></div>
+
 
             <div class="text-center text-margin">
 
@@ -26,7 +26,7 @@
                     <textarea class="input form-control" name="description"></textarea>
                 </p>
                 <br>
-                <button class="btn btn-danger" type="submit"><a href="@routes.Application.index()" style="color: #ffffff; text-decoration: none">Пропустить</a></button>
+                <button class="btn btn-danger withoutunderline" type="submit"><a href="@routes.Application.index()" style="color: #ffffff">Пропустить</a></button>
                 <button class="btn btn-primary" type="submit">@Messages("Продолжить")</button>
 
 

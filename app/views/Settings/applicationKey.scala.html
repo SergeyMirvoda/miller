@@ -1,19 +1,38 @@
 @(user: User)
 @import helper._
 
+
 @main(Messages("application Key")){
+<head>
+<style>
+    .warning{
+        margin: 3em 20em 1em;
+        text-align: center;
+        padding: 7px;
+        font-weight: bold;
+        border: 1px solid crimson;
+        color: #000000;
+    }
+    .asterisk{
+        font-size: 190%;
+        color: #ac2925;
+    }
+</style>
+</head>
+<body>
 
-
-
-@form(routes.Application.apiKeyGenerator()) {
-    <fieldset>
-        <div class="text-margin text-center">
-        <div class="h1 text-capitalize"><Strong>application Key</Strong> for <Strong>@user.applicationName</Strong></div>
-        <p>
-           <input class="h4 input form-control"  readonly name="appKey" value="@user.appKey">
-        </p>
-        <button class="btn  btn-danger" type="submit"> Generate new key </button>
-        </div>
-</fieldset>
+    @form(routes.Application.apiKeyGenerator()) {
+        <fieldset>
+            <div class="text-margin text-center">
+            <div class="h1 text-capitalize"><Strong>application Key</Strong> for <Strong>@user.applicationName</Strong></div>
+            <p>
+               <input class="h4 input form-control"  readonly name="appKey" value="@user.appKey">
+            </p>
+            <button class="btn  btn-danger" type="submit"><strong> Generate new key</strong></button>
+            </div>
+        </fieldset>
 }
+    <div class="warning"><span class="asterisk">&#42;</span> Если вы хотите изменить ключ,<br> то не забудьте поменять его везде <br> где вы его используете</div>
+</body>
+
 }

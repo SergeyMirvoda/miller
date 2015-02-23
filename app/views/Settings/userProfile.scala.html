@@ -4,27 +4,34 @@
 
 
 @main(Messages("Изменить пароль")) {
-    <div class="text-center text-margin">
-        <h1>@Messages("Изменить пароль")</h1>
+    <head>
+        <style>
 
-        @form(routes.Application.userProfileEdit) {
-        <br>
-        <div>
-            <input class="form-control input"  type="text" name="oldPass" placeholder="Введите текущий пароль">
-        </div>
-        <br>
-        <div >
-            <input class="input form-control "  type="text" name="newPass" placeholder="Введите новый пароль">
-        </div>
-        <br>
-        <div >
-            <input class="form-control input" type="text" name="rePass" placeholder="Повторите новый пароль">
-        </div>
+        </style>
+    </head>
+    <body>
+        <div class="text-center text-margin">
+            <h1>@Messages("Изменить пароль")</h1>
+
+            @form(routes.Application.userProfileEdit) {
             <br>
+            <div>
+                <input class="form-control input"  type="text" name="oldPass" placeholder="Введите текущий пароль">
+            </div>
+            <br>
+            <div >
+                <input class="input form-control "  type="text" name="newPass" placeholder="Введите новый пароль">
+            </div>
+            <br>
+            <div >
+                <input class="form-control input" type="text" name="rePass" placeholder="Повторите новый пароль">
+            </div>
+                <br>
 
-        <button type="submit" class="btn btn-primary">@Messages("Сохранить изменения")</button>
+            <button type="submit" class="btn btn-green">@Messages("Сохранить изменения")</button>
 
 
-    </div>}
-
+        </div>
+        }
+    </body>
 }

@@ -19,6 +19,7 @@
 
         <title>@title</title>
             <!-- css taken from getbootstrap.com-->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
@@ -41,23 +42,12 @@
         /* Margin bottom by footer height */
         margin-bottom: 60px;
         }
-        footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        /* Set the fixed height of the footer here */
-        height: 60px;
-        background-color: #f5f5f5;
-        }
+
         .container {
         width: auto;
-        max-width: 680px;
+        max-width: 400px;
         padding: 0 15px;
         }
-        .withoutunderline{
-        text-decoration: none;
-        }
-
         </style>
     </head>
     <body>
@@ -68,17 +58,17 @@
                 <ul class="nav navbar-center navbar-nav">
 
                     @if(request.username == null) {
-                        <li class="active"><a href="@routes.Application.index()">Главная страница</a></li>
-                        <li><a href="@routes.Application.register()">Регистрация</a></li>
+                        <li><a href="@routes.Application.index()"><strong>Главная страница</strong></a></li>
+                        <li><a href="@routes.Application.register()"><strong>Регистрация</strong></a></li>
                         }
 
                     @if(request.username != null) {
-                        <li class="active"><a href="@routes.Application.index()">Журнал</a></li>
-                        <li class=""><a href="@routes.Application.index()" onclick="throwSampleError()">
-                        Сгенерировать тестовое исключение</a></li>
-                        <li class="active "><a href="@routes.Application.settings()"><strong>Настройки</strong></a></li>
+                        <li><a href="@routes.Application.index()"><strong>Журнал</strong></a></li>
+                        <li><a href="@routes.Application.index()" onclick="throwSampleError()">
+                        <strong>Сгенерировать тестовое исключение</strong></a></li>
+                        <li><a href="@routes.Application.settings()"><strong>Настройки</strong></a></li>
                         <li><a href="#"><strong>Документация</strong></a></li>
-                        <li class="active"><a href="@routes.Application.logout()">Выход</a></li>
+                        <li><a href="@routes.Application.logout()"><strong>Выход</strong></a></li>
                     }
                 </ul>
             </div>
@@ -89,7 +79,7 @@
 
         <footer class="footer">
             <div class="container">
-                <p class="text-muted text-center"><strong>2015</strong><br/>Дипломная работа Владимира Миллера</p>
+                <p class="text-muted text-center"><span style="color: #fefcff"><strong>2015 <br> Дипломная работа Владимира Миллера</strong></span></p>
             </div>
         </footer>
             <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

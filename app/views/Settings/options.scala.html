@@ -1,51 +1,45 @@
 
 @main("Настройки") {
     <head>
-        <style>
-        .parent {
-        margin: 5%; /* Отступы вокруг элемента */
-        background: #ffffff; /* Цвет фона */
-        padding: 10px; /* Поля вокруг текста */
-        }
-        .child {
-        border: 1px solid #999; /* Параметры рамки */
-        padding: 10px; /* Поля вокруг текста */
-        margin: 50px; /* Отступы вокруг */
-        }
-        </style>
+    <style>
+
+    </style>
     </head>
     <body>
-        <div class="parent ">
-            <p style="text-align: center">@request.username</p>
-            <div class="child">
+
+            <p style="margin: 10%; text-align: center"><strong>Настройки для @request.username</strong></p>
+
+
                 <div class="container ">
 
+
                     <table class="table table-hover">
+
                         <thead>
                             <tr>
-                                <th>Настройки:</th>
+                                <th><span style="font-size: xx-large">Настройки:</span></th>
                             </tr>
                         </thead>
-                        <tbody >
+                        <tbody>
 
                             <tr>
-                                <td><a href="@routes.Application.index()" onclick="throwSampleError()" style="text-decoration: none">
+                                <td><a href="@routes.Application.index()" onclick="throwSampleError()" class="withoutunderline blackfont text-muted">
                                     <strong>@Messages("Сгенерировать тестовое исключение")</strong></a></td></tr>
                             <tr>
-                                <td><a style="text-decoration: none" href="@routes.Application.applicationKeyPage()"><strong>@Messages("Application Key")</strong></a></td>
+                                <td><a href="@routes.Application.applicationKeyPage()" class="withoutunderline blackfont text-muted"><strong>@Messages("Application Key")</strong></a></td>
                             </tr>
                             <tr>
-                                <td><a href="@routes.Application.applicationProfilePage()" style="text-decoration: none"><strong>@Messages("Информация о приложении")</strong></a></td>
+                                <td><a href="@routes.Application.applicationProfilePage()" class="withoutunderline blackfont text-muted"><strong>@Messages("Информация о приложении")</strong></a></td>
                             </tr>
                             <tr>
-                                <td><a href="@routes.Application.userProfilePage()" style="text-decoration: none"><strong>@Messages("Изменить пароль")</strong></a></td>
+                                <td><a href="@routes.Application.userProfilePage()" class="withoutunderline blackfont text-muted"><strong>@Messages("Изменить пароль")</strong></a></td>
                             </tr>
                         </tbody>
                     </table>
 
                 </div>
-            </div>
-        </div>
+
+
 
     </body>
 
