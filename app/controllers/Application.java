@@ -33,6 +33,7 @@ public class Application extends Controller {
             return ok(index.render(ErrorReportModel.find
                                     .where()
                                     .eq("apiKey", key)
+                                    .orderBy("message")
                                     .findList()
                     )
             );
@@ -58,8 +59,10 @@ public class Application extends Controller {
         ErrorReportModel model = Json.fromJson(json, ErrorReportModel.class);
         model.id = UUID.randomUUID();
         model.happens = 1;
+        String mess = model.getMessage().toLowerCase();
         String key = model.apiKey;
-        System.out.println(key);
+        System.out.println(key + " " + mess); //TODO message goes to lower case, case work
+        model.setMessage(mess);
         UUID suuid = UUID.fromString(key);
         String x = model.getMessage();
         UUID appKey = reportChecker(suuid);
@@ -138,10 +141,8 @@ public class Application extends Controller {
         } else {
             session().clear();
             String x = loginForm.get().email; //для первоначальных настроек безопасности и проверки работоспособности
-            //TODO нужно попробовать установить email в качестве ключа сессии, дальше нужно экспериментировать
+
             //TODO Получить из БД apiKey и установить его в сессию
-            //Первый передавался - apiKey второй - DEV-KEY_1
-            //TODO исправить аутентификацию
             session("email", x);     //loginForm.get().email
              return GO_HOME;
         }
@@ -228,14 +229,14 @@ public class Application extends Controller {
         String oldPass = form().bindFromRequest().get("oldPass");
         String newPass = form().bindFromRequest().get("newPass");
         String rePass = form().bindFromRequest().get("rePass");
-        System.out.println(newPass+" "+ rePass+":new  old:"+oldPass+" "+passOrigin );       //TODO clear
+
         String passValidation = passwordIsValid(session().get("email"), oldPass);
         if (passValidation == null){
             return ok("не совпали1");
         }else {
             if ((newPass == rePass) || newPass != null){
-                System.out.println("new " +newPass+" "+ rePass);        //TODO clear
-                user.setPassword(newPass);
+
+                user.setPassword(newPass);      //TODO изменить возвращение при ошибках
                 user.setPassword(newPass);
                 user.update();
                 Ebean.update(user);
@@ -263,10 +264,8 @@ public class Application extends Controller {
         User user = User.findByEmail(session().get("email"));
         String appName = form().bindFromRequest().get("applicationName");
         String descript = form().bindFromRequest().get("description");
-        System.out.println("new " +appName+" "+ descript);      //TODO clear
         user.setApplicationName(appName);
         user.setDescription(descript);
-
         user.save();
         Ebean.save(user);
         return play.mvc.Results.ok(views.html.Settings.applicationProfile.render(user));
@@ -279,7 +278,6 @@ public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result apiKeyGenerator(){
         UUID x = UUID.randomUUID();
-        System.out.println(x);      //TODO clear
         User user = User.findByEmail(session().get("email"));
         user.setAppKey(x);
         user.save();
