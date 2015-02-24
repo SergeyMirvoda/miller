@@ -75,8 +75,16 @@ public class Application extends Controller {
             for (ErrorReportModel reportModel : list) {
                 if (list.size() != 0) {
                     /**
-                     * TODO добавить коментарий
-                     * TODO добавить проверку на принадлежность к ключу
+                     * входящему отчету присваевается id, а так же в message меняется регистр на прописной ->
+                     * Сверяемся на принадлежность ключа(apiKey) из отчета какому-либо пользователю->
+                     * ..если совпадений нет, то отчет удаляется
+                     * ..если совпадения есть то формируется спсок по пунктам->
+                     *   ..пользователя(которому пренадлежит ключ) записи с таким же полем message ->
+                     *     ..если записей не существует, то добавляется новая
+                     *     ..если запись есть, счётчик = 1, старая запись удаляется, а новая сохраняется +1 к счётчику
+                     *     ..если запись есть, счётчик > 1, старая запись удаляется, новая сохраняется добавляя к счётчику значение старой записи
+                     *     ..если запись есть, счётчик = 0 или <0, запись удаляется, новая сохраняется, значение счётчика = 1
+                     *
                      */
                     if (reportModel.happens == 1) {
                         int temp = counter;
@@ -93,7 +101,7 @@ public class Application extends Controller {
                         Ebean.save(reportModel);
                         model.setHappens(temp + 1);
                         Ebean.save(model);
-                    } else if (reportModel.happens == 0) {
+                    } else if (reportModel.happens == 0) { //TODO добавить или меньше ноля
                             Ebean.delete(reportModel);
                             System.out.println("Something go wrong");
                     }
