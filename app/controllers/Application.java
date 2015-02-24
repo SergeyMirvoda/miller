@@ -101,7 +101,7 @@ public class Application extends Controller {
                         Ebean.save(reportModel);
                         model.setHappens(temp + 1);
                         Ebean.save(model);
-                    } else if (reportModel.happens == 0) { //TODO добавить или меньше ноля
+                    } else if (reportModel.happens == 0 | reportModel.happens < 0) { //TODO добавить или меньше ноля
                             Ebean.delete(reportModel);
                             System.out.println("Something go wrong");
                     }
